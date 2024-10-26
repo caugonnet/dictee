@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import messagebox
 
@@ -24,9 +25,15 @@ class JeuDeFrappe:
         self.label_resultat.pack(pady=20)
 
     def verifier_mot(self, event=None):
-        mot_saisi = self.entry.get()
+        # Récupérer le mot saisi et le mot attendu
+        mot_saisi = self.entry.get().strip()
         mot_attendu = mots[self.index]
-        if mot_saisi == mot_attendu:
+
+        # Nettoyer les espaces en excès du mot saisi
+        mot_saisi_normalized = " ".join(mot_saisi.split())
+
+        # Vérification du mot normalisé contre le mot attendu
+        if mot_saisi_normalized == mot_attendu:
             self.label_resultat.config(text="Correct !", fg="green")
             self.index += 1
             if self.index < len(mots):
@@ -42,4 +49,3 @@ class JeuDeFrappe:
 root = tk.Tk()
 jeu = JeuDeFrappe(root)
 root.mainloop()
-
